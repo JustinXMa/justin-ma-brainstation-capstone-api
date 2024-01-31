@@ -18,7 +18,7 @@ const getAllTutorials = async (_req, res) => {
             )
         res.status(200).json(data);
     } catch (error) {
-        res.status(400).send('Error getting all tutorials: ', error);
+        res.status(400).send(`Error getting all tutorials: ${error}`);
     }
 }
 
@@ -41,7 +41,7 @@ const getOneTutorial = async (req, res) => {
             )
         res.status(200).json(data)
     } catch (error) {
-        res.status(400).send('error getting tutorial: ', error)
+        res.status(400).send(`error getting tutorial: ${error}`)
     }
 }
 

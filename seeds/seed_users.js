@@ -3,7 +3,7 @@
  * @returns { Promise<void> } 
  */
 exports.seed = async function (knex) {
-  // Deletes ALL existing entries
+  await knex('tutorials').del();
   await knex('users').del()
   await knex('users').insert([
     { id: 1, user_name: 'Jerstin', user_email: 'jerstin@example.com', user_password: 'hashed_password_1' },
