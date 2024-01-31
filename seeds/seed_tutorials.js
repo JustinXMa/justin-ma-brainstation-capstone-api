@@ -7,7 +7,7 @@ exports.seed = async function (knex) {
   await knex('tutorials').del()
   await knex('tutorials').insert([
     {
-      tutorial_id: 1,
+      id: 1,
       build_name: 'Castle',
       build_creator: 'Alex',
       category: 'Architecture',
@@ -19,7 +19,7 @@ exports.seed = async function (knex) {
       user_id: 3,
     },
     {
-      tutorial_id: 2,
+      id: 2,
       build_name: 'Farm',
       build_creator: 'Steve',
       category: 'Nature',
@@ -31,7 +31,7 @@ exports.seed = async function (knex) {
       user_id: 2,
     },
     {
-      tutorial_id: 3,
+      id: 3,
       build_name: 'Underwater base',
       build_creator: 'Steve',
       category: 'Architecture',
@@ -43,7 +43,7 @@ exports.seed = async function (knex) {
       user_id: 2,
     },
     {
-      tutorial_id: 4,
+      id: 4,
       build_name: 'Redstone Chicken Farm',
       build_creator: 'Jerstin',
       category: 'Redstone',
@@ -55,7 +55,7 @@ exports.seed = async function (knex) {
       user_id: 1,
     },
     {
-      tutorial_id: 5,
+      id: 5,
       build_name: 'Treehouse',
       build_creator: 'Alex',
       category: 'Architecture',

@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
     return knex.schema.createTable('tutorials', function (table) {
-        table.increments('tutorial_id').primary();
+        table.increments('id').primary();
         table.string('build_name');
         table.string('build_creator');
         table.string('category');
