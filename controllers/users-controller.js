@@ -28,8 +28,26 @@ const loginUser = async (req, res) => {
     if ((!user_name && !user_email) || !user_password) {
         return res.status(400).send('Please make sure all fields are filled')
     }
+    const user = await knex('users').where((account) => {
+        account.where({ user_name: user_name }).orWhere({ user_email: user_email })
+    }).first()
+    if (!user) {
+        res.status(400).send('Invalid user')
+    }
+    const correctPassword = bcrypt.compareSync(user_password, user.password)
+    if (!correctPassword) {
+        res.status(400).send('Incorrect password')
+    }
+    const token = jwt.sign(
+        { id: user.id, user_credentials: user_name || user_email },
+        process.env.JWT_KEY,
+        { expiresIn: "24h" }
+    )
+    res.json({ token: token });
+    res.status(200);
 }
 
 module.exports = {
     registerUser,
+    loginUser
 }
