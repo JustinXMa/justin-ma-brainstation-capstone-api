@@ -9,6 +9,7 @@ const getAllTutorials = async (_req, res) => {
                 'tutorials.build_name',
                 'tutorials.build_creator',
                 'tutorials.category',
+                'tutorials.description',
                 'tutorials.instructions',
                 'tutorials.views',
                 'tutorials.likes',
