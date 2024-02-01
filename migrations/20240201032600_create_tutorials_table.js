@@ -8,6 +8,7 @@ exports.up = function (knex) {
         table.string('build_name');
         table.string('build_creator');
         table.string('category');
+        table.string('description');
         table.text('instructions');
         table.integer('views');
         table.integer('likes');

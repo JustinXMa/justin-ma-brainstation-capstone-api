@@ -25,16 +25,25 @@ const registerUser = async (req, res) => {
 // Login user:
 const loginUser = async (req, res) => {
     const { user_name, user_email, user_password } = req.body;
-    if ((!user_name && !user_email) || !user_password) {
+    if ((!user_name || !user_email) && !user_password) {
+        console.log(req.body);
         return res.status(400).send('Please make sure all fields are filled')
     }
     const user = await knex('users').where((account) => {
-        account.where({ user_name: user_name }).orWhere({ user_email: user_email })
+        if (user_name) {
+            account.where({ user_name: user_name })
+        }
+        if (user_email) {
+            account.orWhere({ user_email: user_email })
+        }
     }).first()
+
+    console.log(user);
+
     if (!user) {
         res.status(400).send('Invalid user')
     }
-    const correctPassword = bcrypt.compareSync(user_password, user.password)
+    const correctPassword = bcrypt.compareSync(user_password, user.user_password)
     if (!correctPassword) {
         res.status(400).send('Incorrect password')
     }
