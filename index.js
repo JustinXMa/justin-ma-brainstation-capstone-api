@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', usersRoutes);
 app.use('/api/tutorials', tutorialsRoutes);

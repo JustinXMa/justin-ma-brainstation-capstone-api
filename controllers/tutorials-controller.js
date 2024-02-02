@@ -50,15 +50,16 @@ const getOneTutorial = async (req, res) => {
 
 // define storage for multer
 
-// const storage = multer.diskStorage({
-//     destination: function (req, res, cb) {
-//         cb(null, '/public/images')
-//     }
-// })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/images');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    },
+});
 
-// const upload = multer({ storage: storage });
-
-const upload = multer({ dest: 'public/images' });
+const upload = multer({ storage: storage });
 
 const postNewTutorial = async (req, res) => {
     try {
