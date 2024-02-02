@@ -10,8 +10,8 @@ exports.up = function (knex) {
         table.string('category');
         table.string('description');
         table.text('instructions');
-        table.integer('views');
-        table.integer('likes');
+        table.integer('views').defaultTo(0);
+        table.integer('likes').defaultTo(0);
         table.string('image_path');
         table.timestamp('create_time').defaultTo(knex.fn.now());
         table.integer('user_id').unsigned();
