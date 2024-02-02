@@ -26,7 +26,6 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     const { user_name, user_email, user_password } = req.body;
     if ((!user_name || !user_email) && !user_password) {
-        console.log(req.body);
         return res.status(400).send('Please make sure all fields are filled')
     }
     const user = await knex('users').where((account) => {
@@ -37,8 +36,6 @@ const loginUser = async (req, res) => {
             account.orWhere({ user_email: user_email })
         }
     }).first()
-
-    console.log(user);
 
     if (!user) {
         res.status(400).send('Invalid user')
