@@ -1,4 +1,5 @@
 const knex = require("knex")(require("../knexfile"));
+const multer = require('multer')
 
 const getAllTutorials = async (_req, res) => {
     try {
@@ -47,14 +48,30 @@ const getOneTutorial = async (req, res) => {
     }
 }
 
+// define storage for multer
+
+// const storage = multer.diskStorage({
+//     destination: function (req, res, cb) {
+//         cb(null, '/public/images')
+//     }
+// })
+
+// const upload = multer({ storage: storage });
+
+const upload = multer({ dest: 'public/images' });
+
 const postNewTutorial = async (req, res) => {
     try {
         const newTutorial = req.body;
+        newTutorial.image_path = req.file.path;
         const requiredFields = [
             'build_name',
+            'build_creator',
             'category',
             'description',
             'instructions',
+            'image_path',
+            'user_id'
         ]
         for (let field of requiredFields) {
             if (!newTutorial[field]) {
@@ -63,9 +80,9 @@ const postNewTutorial = async (req, res) => {
                     .json({ message: `Missing '${field}' in request body` });
             }
         }
-        newTutorial.build_creator = 'Alex'
-        newTutorial.image_path = '/images/treehouse.jpeg'
-        newTutorial.user_id = 3;
+        // newTutorial.build_creator = 'Alex'
+        // newTutorial.image_path = '/images/treehouse.jpeg'
+        // newTutorial.user_id = 3;
         await knex('tutorials').insert(newTutorial)
         res.status(200).send('successfully posted')
     } catch (error) {
@@ -76,5 +93,6 @@ const postNewTutorial = async (req, res) => {
 module.exports = {
     getAllTutorials,
     getOneTutorial,
-    postNewTutorial
+    postNewTutorial,
+    upload
 };
