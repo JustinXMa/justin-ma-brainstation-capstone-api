@@ -81,9 +81,7 @@ const postNewTutorial = async (req, res) => {
                     .json({ message: `Missing '${field}' in request body` });
             }
         }
-        // newTutorial.build_creator = 'Alex'
-        // newTutorial.image_path = '/images/treehouse.jpeg'
-        // newTutorial.user_id = 3;
+
         await knex('tutorials').insert(newTutorial)
         res.status(200).send('successfully posted')
     } catch (error) {
