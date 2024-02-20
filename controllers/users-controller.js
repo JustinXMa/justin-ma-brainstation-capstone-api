@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
     }
     const user = await knex('users').where((account) => {
         if (user_name) {
-            account.where({ user_name: user_name })
+            account.orWhere({ user_name: user_name })
         }
         if (user_email) {
             account.orWhere({ user_email: user_email })
